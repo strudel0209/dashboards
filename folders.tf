@@ -1,5 +1,5 @@
-resource "grafana_folder" "testing" {
+resource "grafana_folder" "testing1" {
    provider = grafana.cloud
 
-   title = "testing"
+   title = "testing1"
 }
