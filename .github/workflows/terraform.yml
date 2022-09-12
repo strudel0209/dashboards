@@ -8,7 +8,7 @@ on:
 
 jobs:
  terraform:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
        # Checkout the repository to the GitHub Actions runner
