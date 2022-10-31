@@ -1,0 +1,364 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_GRAFANACLOUD-ALEXANDRASACHELARESCU-PROM",
+      "label": "grafanacloud-alexandrasachelarescu-prom",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "alertlist",
+      "name": "Alert list",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "gauge",
+      "name": "Gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "9.2.2-eb6f0ffe76"
+    },
+    {
+      "type": "panel",
+      "id": "news",
+      "name": "News",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 11,
+      "options": {
+        "showImage": true
+      },
+      "title": "Panel Title",
+      "type": "news"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "alertInstanceLabelFilter": "",
+        "alertName": "",
+        "dashboardAlerts": false,
+        "groupBy": [],
+        "groupMode": "default",
+        "maxItems": 20,
+        "sortOrder": 1,
+        "stateFilter": {
+          "error": true,
+          "firing": true,
+          "noData": false,
+          "normal": false,
+          "pending": true
+        },
+        "viewMode": "list"
+      },
+      "title": "Panel Title",
+      "type": "alertlist"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_GRAFANACLOUD-ALEXANDRASACHELARESCU-PROM}"
+      },
+      "description": "CPU Utilisation for macOS",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 4,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "bla-bla",
+              "url": "https://alexandrasachelarescu.grafana.net/d/qR0nOuqnz/node-exporter-nodes?orgId=1&var-instance=${__field.labels.instance}&${__url_time_range}"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 14,
+        "x": 0,
+        "y": 8
+      },
+      "id": 2,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Runbook",
+          "url": "https://grafana.com/grafana/dashboards/9617"
+        }
+      ],
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_GRAFANACLOUD-ALEXANDRASACHELARESCU-PROM}"
+          },
+          "editorMode": "code",
+          "expr": "avg (rate(node_cpu_seconds_total{mode!=\"idle\"}[$__rate_interval])) by (instance)",
+          "legendFormat": "{{instance}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "CPU Utilisation",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_GRAFANACLOUD-ALEXANDRASACHELARESCU-PROM}"
+      },
+      "description": "CPU Utilisation for macOS",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "show details",
+              "url": "https://alexandrasachelarescu.grafana.net/d/q3zAy8jnz/my-mac-dashboard?orgId=1&viewPanel=5"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 10,
+        "x": 14,
+        "y": 8
+      },
+      "id": 3,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Runbook",
+          "url": "https://grafana.com/grafana/dashboards/9617"
+        }
+      ],
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.2.2-eb6f0ffe76",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_GRAFANACLOUD-ALEXANDRASACHELARESCU-PROM}"
+          },
+          "editorMode": "code",
+          "expr": "avg (rate(node_cpu_seconds_total{agent_hostname=\"Alexandras-MacBook-Pro.local\",mode!=\"idle\"}[$__rate_interval])) by (cpu)",
+          "legendFormat": "core-{{cpu}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "CPU Utilisation",
+      "type": "gauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 21
+      },
+      "id": 9,
+      "panels": [],
+      "title": "alerts",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 22
+      },
+      "id": 5,
+      "panels": [],
+      "title": "cpu",
+      "type": "row"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-30m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Training Dashboard Simple",
+  "uid": "beRAqV6nz",
+  "version": 8,
+  "weekStart": ""
+}
