@@ -1,0 +1,3103 @@
+{
+    "notify_list": [],
+    "description": "## Load Testing Performance\n\nVisualize API and system performance of an environment under load testing. This can also be set to view other environments, such as prod, but may eventually include custom metrics specific to the success of load tests in QA.\n",
+    "restricted_roles": [],
+    "author_name": "Jordan Winters",
+    "template_variable_presets": [
+        {
+            "template_variables": [],
+            "name": "All Environments"
+        },
+        {
+            "template_variables": [
+                {
+                    "name": "service",
+                    "value": "mse-ada-barndoor-gateway"
+                },
+                {
+                    "name": "barndoor-env",
+                    "value": "prod-barndoor"
+                },
+                {
+                    "name": "kafka-env",
+                    "value": "kafkaprod"
+                },
+                {
+                    "name": "env-tag",
+                    "value": "prod-mse"
+                },
+                {
+                    "name": "mse-env",
+                    "value": "prod-mse"
+                }
+            ],
+            "name": "PROD-MSE"
+        },
+        {
+            "template_variables": [
+                {
+                    "name": "service",
+                    "value": "mse-ada-barndoor-qa-gateway"
+                },
+                {
+                    "name": "barndoor-env",
+                    "value": "pte-barndoor"
+                },
+                {
+                    "name": "kafka-env",
+                    "value": "kafkapte"
+                },
+                {
+                    "name": "env-tag",
+                    "value": "qa-mse"
+                },
+                {
+                    "name": "mse-env",
+                    "value": "qa-mse"
+                }
+            ],
+            "name": "QA-MSE"
+        }
+    ],
+    "template_variables": [
+        {
+            "default": "mse-ada-barndoor-qa-gateway",
+            "prefix": "service",
+            "name": "service",
+            "available_values": [
+                "mse-ada-barndoor-gateway",
+                "mse-ada-barndoor-pte-gateway",
+                "mse-ada-barndoor-qa-gateway",
+                "mse-ada-barndoor-int-gateway",
+                "mse-ada-barndoor-qa200-gateway",
+                "mse-ada-barndoor-dev200-gateway"
+            ]
+        },
+        {
+            "default": "pte-barndoor",
+            "prefix": "environment",
+            "name": "barndoor-env",
+            "available_values": [
+                "prod-barndoor",
+                "pte-barndoor",
+                "dev-barndoor"
+            ]
+        },
+        {
+            "default": "kafkapte",
+            "prefix": "role",
+            "name": "kafka-env",
+            "available_values": [
+                "kafkapte",
+                "kafkadev",
+                "kafkaprod"
+            ]
+        },
+        {
+            "default": "qa-mse",
+            "prefix": "tag",
+            "name": "env-tag",
+            "available_values": [
+                "qa-mse",
+                "prod-mse"
+            ]
+        },
+        {
+            "default": "qa-mse",
+            "prefix": "env",
+            "name": "mse-env",
+            "available_values": [
+                "qa-mse",
+                "prod-mse"
+            ]
+        }
+    ],
+    "is_read_only": false,
+    "id": "wvv-hkf-kju",
+    "title": "Load Testing Performance",
+    "url": "/dashboard/wvv-hkf-kju/load-testing-performance",
+    "created_at": "2022-04-27T15:18:53.671656+00:00",
+    "modified_at": "2022-06-06T15:51:59.225493+00:00",
+    "reflow_type": "fixed",
+    "author_handle": "jwinters@tucowsinc.com",
+    "widgets": [
+        {
+            "definition": {
+                "color": "#eb364b",
+                "text": "Use \"Saved Views\" to switch envs, avoid individual template vars!",
+                "type": "free_text",
+                "font_size": "auto",
+                "text_align": "right"
+            },
+            "layout": {
+                "y": 0,
+                "x": 0,
+                "height": 1,
+                "width": 12
+            },
+            "id": 4958370741684560
+        },
+        {
+            "definition": {
+                "title": "Requests",
+                "type": "group",
+                "show_title": true,
+                "widgets": [
+                    {
+                        "definition": {
+                            "color": "#eb364b",
+                            "text": "| $service  | $barndoor-env |",
+                            "type": "free_text",
+                            "font_size": "auto",
+                            "text_align": "center"
+                        },
+                        "layout": {
+                            "y": 0,
+                            "x": 1,
+                            "height": 1,
+                            "width": 9
+                        },
+                        "id": 2964334282391278
+                    },
+                    {
+                        "definition": {
+                            "tick_pos": "50%",
+                            "font_size": "18",
+                            "type": "note",
+                            "tick_edge": "left",
+                            "text_align": "left",
+                            "content": "View [live APM traces for QA](https://app.datadoghq.com/apm/traces?query=%40_top_level%3A1%20env%3Amse-barndoor.pte-barndoor.bra2%20service%3Amse-ada-barndoor-qa-gateway%20-resource_name%3A%22GET%20%2F_webapp%2Fhealth%22&cols=core_service%2Ccore_resource_name%2Clog_duration%2Clog_http.method%2Clog_http.status_code&historicalData=true&messageDisplay=inline&sort=desc&start=1651156425391&end=1651157325391&paused=false)",
+                            "vertical_align": "top",
+                            "has_padding": true,
+                            "show_tick": false,
+                            "background_color": "blue"
+                        },
+                        "layout": {
+                            "y": 1,
+                            "x": 4,
+                            "height": 1,
+                            "width": 4
+                        },
+                        "id": 8587839116121702
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "title_align": "left",
+                            "markers": [],
+                            "legend_layout": "auto",
+                            "show_legend": false,
+                            "title": "MSE API Request Duration",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "display_type": "line",
+                                    "response_format": "timeseries",
+                                    "queries": [
+                                        {
+                                            "query": "avg:trace.hapi.request.duration{$service,$barndoor-env} by {resource_name,http.status_code}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 2,
+                            "x": 0,
+                            "height": 2,
+                            "width": 6
+                        },
+                        "id": 4433566034120860
+                    },
+                    {
+                        "definition": {
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1",
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            }
+                                        }
+                                    ],
+                                    "conditional_formats": [
+                                        {
+                                            "palette": "white_on_red",
+                                            "value": 5,
+                                            "comparator": ">"
+                                        },
+                                        {
+                                            "palette": "white_on_yellow",
+                                            "value": 2,
+                                            "comparator": ">"
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "avg:trace.hapi.request.duration{$service,$barndoor-env} by {resource_name,http.status_code}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "avg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "title_align": "left",
+                            "title_size": "16",
+                            "title": "MSE API Request Duration (http.status_code)"
+                        },
+                        "layout": {
+                            "y": 2,
+                            "x": 6,
+                            "height": 2,
+                            "width": 6
+                        },
+                        "id": 4938357498553448
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "title_align": "left",
+                            "markers": [],
+                            "legend_layout": "auto",
+                            "show_legend": false,
+                            "title": "MSE API Request Errors",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "display_type": "line",
+                                    "response_format": "timeseries",
+                                    "queries": [
+                                        {
+                                            "query": "avg:trace.hapi.request.errors{$service,$barndoor-env} by {resource_name,http.status_code}.as_count()",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 4,
+                            "x": 0,
+                            "height": 2,
+                            "width": 6
+                        },
+                        "id": 408052939502802
+                    },
+                    {
+                        "definition": {
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1",
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            }
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "avg:trace.hapi.request.errors{$service,$barndoor-env} by {resource_name,http.status_code}.as_count()",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "avg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "title_align": "left",
+                            "title_size": "16",
+                            "title": "MSE API Request Errors Top List"
+                        },
+                        "layout": {
+                            "y": 4,
+                            "x": 6,
+                            "height": 2,
+                            "width": 6
+                        },
+                        "id": 4968473602509754
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "title_align": "left",
+                            "markers": [],
+                            "legend_layout": "auto",
+                            "show_legend": false,
+                            "title": "MSE API Request Hits",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "display_type": "line",
+                                    "response_format": "timeseries",
+                                    "queries": [
+                                        {
+                                            "query": "avg:trace.hapi.request.hits{$service,$barndoor-env} by {resource_name,http.status_code}.as_count()",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 6,
+                            "x": 0,
+                            "height": 3,
+                            "width": 6
+                        },
+                        "id": 8000708471753598
+                    },
+                    {
+                        "definition": {
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1",
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            }
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "avg:trace.hapi.request.hits{$service,$barndoor-env} by {resource_name,http.status_code}.as_count()",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "sum"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "title_align": "left",
+                            "title_size": "16",
+                            "title": "MSE API Request Hits"
+                        },
+                        "layout": {
+                            "y": 6,
+                            "x": 6,
+                            "height": 3,
+                            "width": 6
+                        },
+                        "id": 2265408596087010
+                    },
+                    {
+                        "definition": {
+                            "type": "query_table",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "alias": "Average",
+                                            "conditional_formats": [
+                                                {
+                                                    "palette": "white_on_red",
+                                                    "value": 5,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_yellow",
+                                                    "value": 2,
+                                                    "comparator": ">"
+                                                }
+                                            ],
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            },
+                                            "formula": "query1"
+                                        },
+                                        {
+                                            "alias": "Hits",
+                                            "formula": "query2"
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "avg:trace.hapi.request.duration{$service,$barndoor-env} by {resource_name,http.status_code}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "avg"
+                                        },
+                                        {
+                                            "query": "avg:trace.hapi.request.hits{$service,$barndoor-env} by {resource_name,http.status_code}.as_count()",
+                                            "data_source": "metrics",
+                                            "name": "query2",
+                                            "aggregator": "max"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "title_align": "left",
+                            "title_size": "16",
+                            "title": "Request Timings - *"
+                        },
+                        "layout": {
+                            "y": 9,
+                            "x": 0,
+                            "height": 3,
+                            "width": 12
+                        },
+                        "id": 7331814540842374
+                    }
+                ],
+                "layout_type": "ordered",
+                "background_color": "vivid_blue"
+            },
+            "layout": {
+                "y": 1,
+                "x": 0,
+                "height": 13,
+                "width": 12
+            },
+            "id": 2585202619607716
+        },
+        {
+            "definition": {
+                "title": "Consumer Lag - Internal Topics",
+                "type": "group",
+                "show_title": true,
+                "widgets": [
+                    {
+                        "definition": {
+                            "color": "#eb364b",
+                            "text": "| $kafka-env | topic mse-service-specific |",
+                            "type": "free_text",
+                            "font_size": "auto",
+                            "text_align": "center"
+                        },
+                        "layout": {
+                            "y": 0,
+                            "x": 3,
+                            "height": 1,
+                            "width": 5
+                        },
+                        "id": 7801749193182320
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "title": "MSE Provisioning Latest Internal Topic Lag",
+                            "title_align": "left",
+                            "has_search_bar": "auto",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "alias": "Lag",
+                                            "conditional_formats": [
+                                                {
+                                                    "palette": "white_on_red",
+                                                    "value": 10,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_yellow",
+                                                    "value": 1,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_green",
+                                                    "value": 2,
+                                                    "comparator": "<"
+                                                }
+                                            ],
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            },
+                                            "cell_display_mode": "bar",
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "max:kafka.consumer_lag{consumer_group:mse-provisioning*,$kafka-env,consumer_group:*qa} by {topic}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "last"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "query_table"
+                        },
+                        "layout": {
+                            "y": 1,
+                            "x": 0,
+                            "height": 3,
+                            "width": 12
+                        },
+                        "id": 2159832804030196
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "title_align": "left",
+                            "markers": [],
+                            "legend_layout": "auto",
+                            "show_legend": true,
+                            "title": "MSE Provisioning Internal Topic Lag",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "display_type": "line",
+                                    "response_format": "timeseries",
+                                    "queries": [
+                                        {
+                                            "query": "max:kafka.consumer_lag{$kafka-env,consumer_group:mse-provisioning*,consumer_group:*qa} by {topic}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 4,
+                            "x": 0,
+                            "height": 3,
+                            "width": 12
+                        },
+                        "id": 3553718885991252
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "title": "MSE Accounts Latest Internal Topic Lag",
+                            "title_align": "left",
+                            "has_search_bar": "auto",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "alias": "Lag",
+                                            "conditional_formats": [
+                                                {
+                                                    "palette": "white_on_red",
+                                                    "value": 10,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_yellow",
+                                                    "value": 1,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_green",
+                                                    "value": 2,
+                                                    "comparator": "<"
+                                                }
+                                            ],
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            },
+                                            "cell_display_mode": "bar",
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "max:kafka.consumer_lag{consumer_group:mse-accounts-service.qa.*,$kafka-env} by {topic}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "last"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "query_table"
+                        },
+                        "layout": {
+                            "y": 7,
+                            "x": 0,
+                            "height": 3,
+                            "width": 12
+                        },
+                        "id": 523072954394438
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "title": "MSE Accounting Latest Internal Topic Lag",
+                            "title_align": "left",
+                            "has_search_bar": "auto",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "alias": "Lag",
+                                            "conditional_formats": [
+                                                {
+                                                    "palette": "white_on_red",
+                                                    "value": 10,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_yellow",
+                                                    "value": 1,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_green",
+                                                    "value": 2,
+                                                    "comparator": "<"
+                                                }
+                                            ],
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            },
+                                            "cell_display_mode": "bar",
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "max:kafka.consumer_lag{consumer_group:mse-accounting-service.qa.*,$kafka-env} by {topic}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "last"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "query_table"
+                        },
+                        "layout": {
+                            "y": 10,
+                            "x": 0,
+                            "height": 3,
+                            "width": 12
+                        },
+                        "id": 3268443156245968
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "title_align": "left",
+                            "markers": [],
+                            "legend_layout": "auto",
+                            "show_legend": true,
+                            "title": "MSE Accounts and Accounting Internal Topic Lag",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "display_type": "line",
+                                    "response_format": "timeseries",
+                                    "queries": [
+                                        {
+                                            "query": "max:kafka.consumer_lag{$kafka-env,consumer_group:mse-account*,consumer_group:*qa} by {topic}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 13,
+                            "x": 0,
+                            "height": 3,
+                            "width": 12
+                        },
+                        "id": 5819364640593920
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "title": "MSE Billing Latest Internal Topic Lag",
+                            "title_align": "left",
+                            "has_search_bar": "auto",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "alias": "Lag",
+                                            "conditional_formats": [
+                                                {
+                                                    "palette": "white_on_red",
+                                                    "value": 10,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_yellow",
+                                                    "value": 1,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_green",
+                                                    "value": 2,
+                                                    "comparator": "<"
+                                                }
+                                            ],
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            },
+                                            "cell_display_mode": "bar",
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "max:kafka.consumer_lag{consumer_group:mse.billing-*,$kafka-env,consumer_group:*qa-mse.1} by {topic}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "last"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "query_table"
+                        },
+                        "layout": {
+                            "y": 16,
+                            "x": 0,
+                            "height": 3,
+                            "width": 12
+                        },
+                        "id": 1146215320659930
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "title_align": "left",
+                            "markers": [],
+                            "legend_layout": "auto",
+                            "show_legend": true,
+                            "title": "MSE Billing Internal Topic Lag",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "display_type": "line",
+                                    "response_format": "timeseries",
+                                    "queries": [
+                                        {
+                                            "query": "max:kafka.consumer_lag{$kafka-env,consumer_group:mse.billing*,consumer_group:*qa-mse.1} by {topic}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 19,
+                            "x": 0,
+                            "height": 3,
+                            "width": 12
+                        },
+                        "id": 8602556708440702
+                    }
+                ],
+                "layout_type": "ordered",
+                "background_color": "vivid_green"
+            },
+            "layout": {
+                "y": 14,
+                "x": 0,
+                "height": 23,
+                "width": 12
+            },
+            "id": 6055893611704378
+        },
+        {
+            "definition": {
+                "title": "Consumer Lag - Internal Topics by Partition",
+                "type": "group",
+                "show_title": true,
+                "widgets": [
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "title": "MSE Provisioning Latest Internal Topic Lag by Partition",
+                            "title_align": "left",
+                            "has_search_bar": "auto",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "alias": "Lag",
+                                            "conditional_formats": [
+                                                {
+                                                    "palette": "white_on_red",
+                                                    "value": 10,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_yellow",
+                                                    "value": 1,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_green",
+                                                    "value": 2,
+                                                    "comparator": "<"
+                                                }
+                                            ],
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            },
+                                            "cell_display_mode": "bar",
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "max:kafka.consumer_lag{consumer_group:mse-provisioning*,$kafka-env,consumer_group:*qa} by {topic,partition}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "last"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "query_table"
+                        },
+                        "layout": {
+                            "y": 0,
+                            "x": 0,
+                            "height": 3,
+                            "width": 12
+                        },
+                        "id": 418738761388774
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "title_align": "left",
+                            "markers": [],
+                            "legend_layout": "auto",
+                            "show_legend": true,
+                            "title": "MSE Provisioning Internal Topic Lag by Partition",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "display_type": "line",
+                                    "response_format": "timeseries",
+                                    "queries": [
+                                        {
+                                            "query": "max:kafka.consumer_lag{$kafka-env,consumer_group:mse-provisioning*,consumer_group:*qa} by {topic,partition}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 3,
+                            "x": 0,
+                            "height": 3,
+                            "width": 12
+                        },
+                        "id": 3623752821824314
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "title": "MSE Accounts Latest Internal Topic Lag by Partition",
+                            "title_align": "left",
+                            "has_search_bar": "auto",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "alias": "Lag",
+                                            "conditional_formats": [
+                                                {
+                                                    "palette": "white_on_red",
+                                                    "value": 10,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_yellow",
+                                                    "value": 1,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_green",
+                                                    "value": 2,
+                                                    "comparator": "<"
+                                                }
+                                            ],
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            },
+                                            "cell_display_mode": "bar",
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "max:kafka.consumer_lag{consumer_group:mse-accounts-service.qa.*,$kafka-env} by {partition,topic}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "last"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "query_table"
+                        },
+                        "layout": {
+                            "y": 6,
+                            "x": 0,
+                            "height": 3,
+                            "width": 12
+                        },
+                        "id": 6956030988470134
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "title": "MSE Accounting Latest Internal Topic Lag by Partition",
+                            "title_align": "left",
+                            "has_search_bar": "auto",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "alias": "Lag",
+                                            "conditional_formats": [
+                                                {
+                                                    "palette": "white_on_red",
+                                                    "value": 10,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_yellow",
+                                                    "value": 1,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_green",
+                                                    "value": 2,
+                                                    "comparator": "<"
+                                                }
+                                            ],
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            },
+                                            "cell_display_mode": "bar",
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "max:kafka.consumer_lag{consumer_group:mse-accounting-service.qa.*,$kafka-env} by {partition,topic}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "last"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "query_table"
+                        },
+                        "layout": {
+                            "y": 9,
+                            "x": 0,
+                            "height": 3,
+                            "width": 12
+                        },
+                        "id": 7443106691127040
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "title_align": "left",
+                            "markers": [],
+                            "legend_layout": "auto",
+                            "show_legend": true,
+                            "title": "MSE Accounts and Accounting Internal Topic Lag by Partition",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "display_type": "line",
+                                    "response_format": "timeseries",
+                                    "queries": [
+                                        {
+                                            "query": "max:kafka.consumer_lag{$kafka-env,consumer_group:mse-account*,consumer_group:*qa} by {topic,partition}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 12,
+                            "x": 0,
+                            "height": 3,
+                            "width": 12
+                        },
+                        "id": 8137168828804662
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "title": "MSE Billing Latest Internal Topic Lag by Partition",
+                            "title_align": "left",
+                            "has_search_bar": "auto",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "alias": "Lag",
+                                            "conditional_formats": [
+                                                {
+                                                    "palette": "white_on_red",
+                                                    "comparator": ">",
+                                                    "value": 10
+                                                },
+                                                {
+                                                    "palette": "white_on_yellow",
+                                                    "comparator": ">",
+                                                    "value": 1
+                                                },
+                                                {
+                                                    "palette": "white_on_green",
+                                                    "comparator": "<",
+                                                    "value": 2
+                                                }
+                                            ],
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            },
+                                            "cell_display_mode": "bar",
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "max:kafka.consumer_lag{consumer_group:mse.billing-*,$kafka-env,consumer_group:*qa-mse.1} by {partition,topic}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "last"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "query_table"
+                        },
+                        "layout": {
+                            "y": 15,
+                            "x": 0,
+                            "height": 3,
+                            "width": 12
+                        },
+                        "id": 3522886570827008
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "title_align": "left",
+                            "markers": [],
+                            "legend_layout": "auto",
+                            "show_legend": true,
+                            "title": "MSE Billing Internal Topic Lag",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "display_type": "line",
+                                    "response_format": "timeseries",
+                                    "queries": [
+                                        {
+                                            "query": "max:kafka.consumer_lag{$kafka-env,consumer_group:mse.billing*,consumer_group:*qa-mse.1} by {topic,partition}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 18,
+                            "x": 0,
+                            "height": 3,
+                            "width": 12
+                        },
+                        "id": 5559642451164922
+                    }
+                ],
+                "layout_type": "ordered",
+                "background_color": "vivid_green"
+            },
+            "layout": {
+                "y": 37,
+                "x": 0,
+                "height": 22,
+                "width": 12
+            },
+            "id": 6758943249337478
+        },
+        {
+            "definition": {
+                "title": "Alerts",
+                "type": "group",
+                "show_title": true,
+                "widgets": [
+                    {
+                        "definition": {
+                            "color": "#eb364b",
+                            "text": "|Hardcoded to \"qa-mse\" or \"nonprod-mse-database\" |",
+                            "type": "free_text",
+                            "font_size": "auto",
+                            "text_align": "center"
+                        },
+                        "layout": {
+                            "y": 0,
+                            "x": 2,
+                            "height": 1,
+                            "width": 7
+                        },
+                        "id": 4750300387713042
+                    },
+                    {
+                        "definition": {
+                            "sort": "status,asc",
+                            "count": 50,
+                            "title_size": "13",
+                            "title": "Alerts",
+                            "title_align": "left",
+                            "show_priority": false,
+                            "hide_zero_counts": true,
+                            "start": 0,
+                            "summary_type": "monitors",
+                            "color_preference": "text",
+                            "query": "tag:(qa-mse OR nonprod-mse-database)",
+                            "show_last_triggered": false,
+                            "type": "manage_status",
+                            "display_format": "countsAndList"
+                        },
+                        "layout": {
+                            "y": 1,
+                            "x": 0,
+                            "height": 6,
+                            "width": 12
+                        },
+                        "id": 7706697969742934
+                    }
+                ],
+                "layout_type": "ordered",
+                "background_color": "vivid_pink"
+            },
+            "layout": {
+                "y": 59,
+                "x": 0,
+                "height": 8,
+                "width": 12
+            },
+            "id": 5452146617308086
+        },
+        {
+            "definition": {
+                "title": "Scaling Comparison PROD vs QA",
+                "type": "group",
+                "show_title": true,
+                "widgets": [
+                    {
+                        "definition": {
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query2 / query1",
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            }
+                                        }
+                                    ],
+                                    "conditional_formats": [
+                                        {
+                                            "palette": "white_on_red",
+                                            "value": 1,
+                                            "comparator": ">"
+                                        },
+                                        {
+                                            "palette": "white_on_green",
+                                            "value": 1,
+                                            "comparator": ">="
+                                        },
+                                        {
+                                            "palette": "white_on_red",
+                                            "value": 1,
+                                            "comparator": "<"
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "sum:docker.containers.running{team:mse-platform,env:qa-mse} by {nomad_job,nomad_task}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "last"
+                                        },
+                                        {
+                                            "query": "sum:docker.containers.running{team:mse-platform,env:prod-mse} by {nomad_job,nomad_task}",
+                                            "data_source": "metrics",
+                                            "name": "query2",
+                                            "aggregator": "last"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "title_align": "left",
+                            "title_size": "16",
+                            "title": "Running Containers Prod/QA Ratio"
+                        },
+                        "layout": {
+                            "y": 0,
+                            "x": 0,
+                            "height": 4,
+                            "width": 12
+                        },
+                        "id": 1655717913391614
+                    },
+                    {
+                        "definition": {
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1",
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            }
+                                        }
+                                    ],
+                                    "conditional_formats": [
+                                        {
+                                            "custom_bg_color": "#3959f9",
+                                            "palette": "custom_bg",
+                                            "value": 0,
+                                            "comparator": ">"
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "sum:docker.containers.running{env:prod-mse} by {nomad_job,nomad_task}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "last"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "title_align": "left",
+                            "title_size": "16",
+                            "title": "Running Containers PROD"
+                        },
+                        "layout": {
+                            "y": 4,
+                            "x": 0,
+                            "height": 2,
+                            "width": 6
+                        },
+                        "id": 5457888391572434
+                    },
+                    {
+                        "definition": {
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1",
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            }
+                                        }
+                                    ],
+                                    "conditional_formats": [
+                                        {
+                                            "custom_bg_color": "#fbba2d",
+                                            "palette": "custom_bg",
+                                            "value": 0,
+                                            "comparator": ">"
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "sum:docker.containers.running{env:qa-mse} by {nomad_job,nomad_task}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "last"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "title_align": "left",
+                            "title_size": "16",
+                            "title": "Running Containers QA"
+                        },
+                        "layout": {
+                            "y": 4,
+                            "x": 6,
+                            "height": 2,
+                            "width": 6
+                        },
+                        "id": 12429049216152
+                    }
+                ],
+                "layout_type": "ordered",
+                "background_color": "blue"
+            },
+            "layout": {
+                "y": 67,
+                "x": 0,
+                "height": 7,
+                "width": 12
+            },
+            "id": 477930406285078
+        },
+        {
+            "definition": {
+                "tick_pos": "50%",
+                "font_size": "18",
+                "type": "note",
+                "tick_edge": "left",
+                "text_align": "left",
+                "content": "**WIP** Many template vars above don't work and are **hard-coded for QA**",
+                "vertical_align": "top",
+                "has_padding": true,
+                "show_tick": false,
+                "background_color": "pink"
+            },
+            "layout": {
+                "y": 0,
+                "x": 0,
+                "is_column_break": true,
+                "height": 1,
+                "width": 12
+            },
+            "id": 1155238403711464
+        },
+        {
+            "definition": {
+                "title": "Service Summary",
+                "type": "group",
+                "show_title": true,
+                "widgets": [
+                    {
+                        "definition": {
+                            "color": "#eb364b",
+                            "text": "| barndoor-env hard-coded for QA |",
+                            "type": "free_text",
+                            "font_size": "auto",
+                            "text_align": "center"
+                        },
+                        "layout": {
+                            "y": 0,
+                            "x": 3,
+                            "height": 1,
+                            "width": 6
+                        },
+                        "id": 679059778629248
+                    },
+                    {
+                        "definition": {
+                            "span_name": "hapi.request",
+                            "service": "$service",
+                            "title": "$service #env:mse-barndoor.pte-barndoor.bra2",
+                            "size_format": "medium",
+                            "show_hits": true,
+                            "show_latency": true,
+                            "show_errors": true,
+                            "show_breakdown": true,
+                            "env": "mse-barndoor.pte-barndoor.bra2",
+                            "show_distribution": true,
+                            "display_format": "one_column",
+                            "type": "trace_service",
+                            "show_resource_list": false
+                        },
+                        "layout": {
+                            "y": 1,
+                            "x": 0,
+                            "height": 11,
+                            "width": 12
+                        },
+                        "id": 3578893773106120
+                    }
+                ],
+                "layout_type": "ordered",
+                "background_color": "vivid_blue"
+            },
+            "layout": {
+                "y": 1,
+                "x": 0,
+                "height": 13,
+                "width": 12
+            },
+            "id": 693193076992616
+        },
+        {
+            "definition": {
+                "title": "Consumer Lag - Barndoor",
+                "type": "group",
+                "show_title": true,
+                "widgets": [
+                    {
+                        "definition": {
+                            "color": "#eb364b",
+                            "text": "| $kafka-env | consumer_group *-qa |",
+                            "type": "free_text",
+                            "font_size": "auto",
+                            "text_align": "center"
+                        },
+                        "layout": {
+                            "y": 0,
+                            "x": 3,
+                            "height": 1,
+                            "width": 6
+                        },
+                        "id": 5952931907963872
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "title": "Barndoor Latest Consumer Lag",
+                            "title_align": "left",
+                            "has_search_bar": "auto",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "alias": "Lag",
+                                            "conditional_formats": [
+                                                {
+                                                    "palette": "white_on_red",
+                                                    "value": 10,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_yellow",
+                                                    "value": 1,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_green",
+                                                    "value": 2,
+                                                    "comparator": "<"
+                                                }
+                                            ],
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            },
+                                            "cell_display_mode": "bar",
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "max:kafka.consumer_lag{consumer_group:barndoor*,$kafka-env,consumer_group:*-qa} by {consumer_group}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "last"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "query_table"
+                        },
+                        "layout": {
+                            "y": 1,
+                            "x": 0,
+                            "height": 3,
+                            "width": 12
+                        },
+                        "id": 1738092712622424
+                    },
+                    {
+                        "definition": {
+                            "type": "query_table",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1",
+                                            "conditional_formats": [
+                                                {
+                                                    "palette": "white_on_red",
+                                                    "value": 10,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_yellow",
+                                                    "value": 1,
+                                                    "comparator": ">"
+                                                },
+                                                {
+                                                    "palette": "white_on_green",
+                                                    "value": 2,
+                                                    "comparator": "<"
+                                                }
+                                            ],
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            },
+                                            "cell_display_mode": "bar"
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "max:kafka.consumer_lag{$kafka-env,consumer_group:barndoor*,consumer_group:*qa} by {partition,topic}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "last"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "title_align": "left",
+                            "title_size": "16",
+                            "title": "Barndoor Latest Consumer Lag by Partition"
+                        },
+                        "layout": {
+                            "y": 4,
+                            "x": 0,
+                            "height": 3,
+                            "width": 12
+                        },
+                        "id": 1847424493828210
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "title_align": "left",
+                            "markers": [],
+                            "legend_layout": "auto",
+                            "show_legend": true,
+                            "title": "Barndoor Consumer Lag",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "display_type": "line",
+                                    "response_format": "timeseries",
+                                    "queries": [
+                                        {
+                                            "query": "max:kafka.consumer_lag{consumer_group:barndoor*,$kafka-env,consumer_group:*-qa} by {consumer_group}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 7,
+                            "x": 0,
+                            "height": 3,
+                            "width": 12
+                        },
+                        "id": 5125158959845528
+                    }
+                ],
+                "layout_type": "ordered",
+                "background_color": "vivid_green"
+            },
+            "layout": {
+                "y": 14,
+                "x": 0,
+                "height": 11,
+                "width": 12
+            },
+            "id": 3685713386799372
+        },
+        {
+            "definition": {
+                "title": "MSE Nomad Client Health",
+                "type": "group",
+                "show_title": true,
+                "widgets": [
+                    {
+                        "definition": {
+                            "color": "#eb364b",
+                            "text": "|Hardcoded to \"nomad-qa-mse*\"\n |",
+                            "type": "free_text",
+                            "font_size": "24",
+                            "text_align": "center"
+                        },
+                        "layout": {
+                            "y": 0,
+                            "x": 3,
+                            "height": 1,
+                            "width": 6
+                        },
+                        "id": 4163624966721570
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "title_align": "left",
+                            "markers": [],
+                            "legend_layout": "auto",
+                            "show_legend": false,
+                            "title": "Memory Usage (%)",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "(query1 / query2) * 100"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "response_format": "timeseries",
+                                    "on_right_yaxis": false,
+                                    "display_type": "line",
+                                    "queries": [
+                                        {
+                                            "query": "avg:nomad.client.host.memory.used{team:mse-platform,host:nomad-qa-mse*} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        },
+                                        {
+                                            "query": "avg:nomad.client.host.memory.total{team:mse-platform,host:nomad-qa-mse*} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query2"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 1,
+                            "x": 0,
+                            "height": 2,
+                            "width": 4
+                        },
+                        "id": 3464656135324924
+                    },
+                    {
+                        "definition": {
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "title": "System load",
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "markers": [],
+                            "legend_layout": "auto",
+                            "show_legend": false,
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "warm",
+                                        "line_type": "solid"
+                                    },
+                                    "response_format": "timeseries",
+                                    "on_right_yaxis": false,
+                                    "display_type": "line",
+                                    "queries": [
+                                        {
+                                            "query": "avg:system.load.1{host:nomad*,$mse-env,team:mse-platform} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "orange",
+                                        "line_type": "solid"
+                                    },
+                                    "response_format": "timeseries",
+                                    "on_right_yaxis": false,
+                                    "display_type": "line",
+                                    "queries": [
+                                        {
+                                            "query": "avg:system.load.5{host:nomad*,$mse-env,team:mse-platform} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "grey",
+                                        "line_type": "solid"
+                                    },
+                                    "response_format": "timeseries",
+                                    "on_right_yaxis": false,
+                                    "display_type": "line",
+                                    "queries": [
+                                        {
+                                            "query": "avg:system.load.15{host:nomad*,$mse-env,team:mse-platform} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 1,
+                            "x": 4,
+                            "height": 2,
+                            "width": 4
+                        },
+                        "id": 1528041202485466
+                    },
+                    {
+                        "definition": {
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "title": "CPU usage (%)",
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "markers": [],
+                            "legend_layout": "auto",
+                            "show_legend": false,
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1 + query2"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "response_format": "timeseries",
+                                    "on_right_yaxis": false,
+                                    "display_type": "line",
+                                    "queries": [
+                                        {
+                                            "query": "avg:system.cpu.system{host:nomad-qa-mse*} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        },
+                                        {
+                                            "query": "avg:system.cpu.user{host:nomad-qa-mse*} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query2"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 1,
+                            "x": 8,
+                            "height": 2,
+                            "width": 4
+                        },
+                        "id": 7594772942181374
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "title_align": "left",
+                            "markers": [],
+                            "legend_layout": "auto",
+                            "show_legend": true,
+                            "title": "Disk Usage %",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        },
+                                        {
+                                            "formula": "query1 * 100"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "response_format": "timeseries",
+                                    "on_right_yaxis": false,
+                                    "display_type": "line",
+                                    "queries": [
+                                        {
+                                            "query": "sum:system.disk.in_use{host:nomad*,$mse-env,team:mse-platform} by {host,device}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 3,
+                            "x": 0,
+                            "height": 2,
+                            "width": 4
+                        },
+                        "id": 4478434592792980
+                    },
+                    {
+                        "definition": {
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "title": "Network traffic (per sec)",
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "markers": [],
+                            "legend_layout": "auto",
+                            "show_legend": false,
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "response_format": "timeseries",
+                                    "on_right_yaxis": false,
+                                    "display_type": "line",
+                                    "queries": [
+                                        {
+                                            "query": "sum:system.net.bytes_rcvd{host:nomad*,$mse-env,team:mse-platform} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "response_format": "timeseries",
+                                    "on_right_yaxis": false,
+                                    "display_type": "bars",
+                                    "queries": [
+                                        {
+                                            "query": "sum:system.net.bytes_sent{host:nomad*,$mse-env,team:mse-platform} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 3,
+                            "x": 4,
+                            "height": 2,
+                            "width": 4
+                        },
+                        "id": 6309905685704734
+                    },
+                    {
+                        "definition": {
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "conditional_formats": [
+                                        {
+                                            "palette": "white_on_green",
+                                            "value": 3,
+                                            "comparator": ">="
+                                        },
+                                        {
+                                            "palette": "white_on_yellow",
+                                            "value": 2,
+                                            "comparator": "<="
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "sum:datadog.agent.running{$mse-env,team:mse-platform,host:nomad*,*}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "last"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "query_value",
+                            "precision": 0,
+                            "title": "Number of Nomad Clients"
+                        },
+                        "layout": {
+                            "y": 3,
+                            "x": 8,
+                            "height": 2,
+                            "width": 4
+                        },
+                        "id": 4745399711948080
+                    }
+                ],
+                "layout_type": "ordered",
+                "background_color": "vivid_orange"
+            },
+            "layout": {
+                "y": 25,
+                "x": 0,
+                "height": 6,
+                "width": 12
+            },
+            "id": 5499120676196782
+        },
+        {
+            "definition": {
+                "title": "Database",
+                "type": "group",
+                "show_title": true,
+                "widgets": [
+                    {
+                        "definition": {
+                            "color": "#eb364b",
+                            "text": "|Hardcoded to \"pgsql-qa-mse*\" in \"nonprod-mse-database\"\n |",
+                            "type": "free_text",
+                            "font_size": "24",
+                            "text_align": "center"
+                        },
+                        "layout": {
+                            "y": 0,
+                            "x": 3,
+                            "height": 1,
+                            "width": 6
+                        },
+                        "id": 1719580705308658
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "title_align": "left",
+                            "markers": [
+                                {
+                                    "display_type": "error dashed",
+                                    "value": "y = 100"
+                                }
+                            ],
+                            "legend_layout": "auto",
+                            "show_legend": false,
+                            "title": "DB Memory Usable",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "response_format": "timeseries",
+                                    "on_right_yaxis": false,
+                                    "display_type": "line",
+                                    "queries": [
+                                        {
+                                            "query": "sum:system.mem.usable{team:mse-platform AND host:pgsql-qa-mse-primary-01.nonprod-mse-database.bra2.tucows.systems OR host:pgsql-qa-mse-standby-01.nonprod-mse-database.bra2.tucows.systems} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 1,
+                            "x": 0,
+                            "height": 2,
+                            "width": 4
+                        },
+                        "id": 4868541714924312
+                    },
+                    {
+                        "definition": {
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "title": "DB System load",
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "markers": [],
+                            "legend_layout": "auto",
+                            "show_legend": false,
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "warm",
+                                        "line_type": "solid"
+                                    },
+                                    "response_format": "timeseries",
+                                    "on_right_yaxis": false,
+                                    "display_type": "line",
+                                    "queries": [
+                                        {
+                                            "query": "avg:system.load.1{host:pgsql-qa-mse-*,!host:pgsql-qa-mse-boost*} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "orange",
+                                        "line_type": "solid"
+                                    },
+                                    "response_format": "timeseries",
+                                    "on_right_yaxis": false,
+                                    "display_type": "line",
+                                    "queries": [
+                                        {
+                                            "query": "avg:system.load.5{host:pgsql-qa-mse-*,!host:pgsql-qa-mse-boost*} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "grey",
+                                        "line_type": "solid"
+                                    },
+                                    "response_format": "timeseries",
+                                    "on_right_yaxis": false,
+                                    "display_type": "line",
+                                    "queries": [
+                                        {
+                                            "query": "avg:system.load.15{host:pgsql-qa-mse-*,!host:pgsql-qa-mse-boost*} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 1,
+                            "x": 4,
+                            "height": 2,
+                            "width": 4
+                        },
+                        "id": 6380839667694126
+                    },
+                    {
+                        "definition": {
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "title": "DB CPU usage (%)",
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "markers": [
+                                {
+                                    "display_type": "error dashed",
+                                    "value": "y = 100"
+                                }
+                            ],
+                            "legend_layout": "auto",
+                            "show_legend": false,
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1 + query2"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "response_format": "timeseries",
+                                    "on_right_yaxis": false,
+                                    "display_type": "line",
+                                    "queries": [
+                                        {
+                                            "query": "avg:system.cpu.system{host:pgsql-qa-mse*} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        },
+                                        {
+                                            "query": "avg:system.cpu.user{host:pgsql-qa-mse*} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query2"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 1,
+                            "x": 8,
+                            "height": 2,
+                            "width": 4
+                        },
+                        "id": 3616521455688716
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "title_align": "left",
+                            "markers": [
+                                {
+                                    "display_type": "error dashed",
+                                    "value": "y = 100"
+                                }
+                            ],
+                            "legend_layout": "auto",
+                            "show_legend": true,
+                            "title": "DB Disk Usage (%)",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1 * 100"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "response_format": "timeseries",
+                                    "on_right_yaxis": false,
+                                    "display_type": "line",
+                                    "queries": [
+                                        {
+                                            "query": "sum:system.disk.in_use{host:pgsql-qa-mse*,!host:pgsql-qa-mse-boost*} by {host,device}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 3,
+                            "x": 0,
+                            "height": 2,
+                            "width": 4
+                        },
+                        "id": 2723726722326438
+                    },
+                    {
+                        "definition": {
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "title": "Network traffic (per sec)",
+                            "yaxis": {
+                                "include_zero": true,
+                                "max": "auto",
+                                "scale": "linear",
+                                "min": "auto",
+                                "label": ""
+                            },
+                            "markers": [],
+                            "legend_layout": "auto",
+                            "show_legend": false,
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "response_format": "timeseries",
+                                    "on_right_yaxis": false,
+                                    "display_type": "line",
+                                    "queries": [
+                                        {
+                                            "query": "sum:system.net.bytes_rcvd{host:pgsql-qa-mse-*,!host:pgsql-qa-mse-boost*} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "response_format": "timeseries",
+                                    "on_right_yaxis": false,
+                                    "display_type": "bars",
+                                    "queries": [
+                                        {
+                                            "query": "sum:system.net.bytes_sent{host:pgsql-qa-mse-*,!host:pgsql-qa-mse-boost*} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 3,
+                            "x": 4,
+                            "height": 2,
+                            "width": 4
+                        },
+                        "id": 7347512027970582
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "title": "DB Connections",
+                            "title_align": "left",
+                            "markers": [],
+                            "legend_layout": "auto",
+                            "show_legend": true,
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        },
+                                        {
+                                            "formula": "query2"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "display_type": "line",
+                                    "response_format": "timeseries",
+                                    "queries": [
+                                        {
+                                            "query": "sum:postgresql.connections{host:pgsql-qa-mse*,!host:pgsql-qa-mse-boost*} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        },
+                                        {
+                                            "query": "sum:postgresql.max_connections{host:pgsql-qa-mse*,!host:pgsql-qa-mse-boost*} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query2"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 5,
+                            "x": 0,
+                            "height": 2,
+                            "width": 4
+                        },
+                        "id": 764095108718704
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "title": "DB Connections (%)",
+                            "title_align": "left",
+                            "markers": [
+                                {
+                                    "display_type": "error dashed",
+                                    "value": "y = 100",
+                                    "label": "Max Connections"
+                                }
+                            ],
+                            "legend_layout": "auto",
+                            "show_legend": true,
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "(query1 / query2) * 100"
+                                        }
+                                    ],
+                                    "style": {
+                                        "line_width": "normal",
+                                        "palette": "dog_classic",
+                                        "line_type": "solid"
+                                    },
+                                    "display_type": "line",
+                                    "response_format": "timeseries",
+                                    "queries": [
+                                        {
+                                            "query": "sum:postgresql.connections{environment:nonprod-mse-database,host:pgsql-qa-mse*} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        },
+                                        {
+                                            "query": "sum:postgresql.max_connections{environment:nonprod-mse-database,host:pgsql-qa-mse*} by {host}",
+                                            "data_source": "metrics",
+                                            "name": "query2"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 5,
+                            "x": 4,
+                            "height": 2,
+                            "width": 4
+                        },
+                        "id": 2947320552153034
+                    }
+                ],
+                "layout_type": "ordered",
+                "background_color": "vivid_orange"
+            },
+            "layout": {
+                "y": 31,
+                "x": 0,
+                "height": 8,
+                "width": 12
+            },
+            "id": 2637567055859272
+        },
+        {
+            "definition": {
+                "title": "MSE Nomad Containers",
+                "type": "group",
+                "show_title": true,
+                "widgets": [
+                    {
+                        "definition": {
+                            "color": "#eb364b",
+                            "text": "|$mse-env\n |",
+                            "type": "free_text",
+                            "font_size": "24",
+                            "text_align": "center"
+                        },
+                        "layout": {
+                            "y": 0,
+                            "x": 3,
+                            "height": 1,
+                            "width": 6
+                        },
+                        "id": 8095871822932534
+                    },
+                    {
+                        "definition": {
+                            "custom_links": [],
+                            "title_size": "16",
+                            "legend_columns": [
+                                "avg",
+                                "min",
+                                "max",
+                                "value",
+                                "sum"
+                            ],
+                            "title": "Container CPU Usage (AVG)",
+                            "title_align": "left",
+                            "markers": [
+                                {
+                                    "display_type": "error dashed",
+                                    "value": "y = 0"
+                                }
+                            ],
+                            "legend_layout": "vertical",
+                            "show_legend": true,
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1"
+                                        }
+                                    ],
+                                    "style": {
+                                        "palette": "dog_classic"
+                                    },
+                                    "display_type": "line",
+                                    "response_format": "timeseries",
+                                    "queries": [
+                                        {
+                                            "query": "avg:docker.cpu.user{team:mse-platform,$mse-env,*} by {nomad_task}",
+                                            "data_source": "metrics",
+                                            "name": "query1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "timeseries"
+                        },
+                        "layout": {
+                            "y": 1,
+                            "x": 0,
+                            "height": 5,
+                            "width": 12
+                        },
+                        "id": 8799817245828512
+                    },
+                    {
+                        "definition": {
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1",
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            }
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "avg:docker.cpu.user{$mse-env,team:mse-platform} by {nomad_job}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "max"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "title_align": "left",
+                            "title_size": "16",
+                            "title": "Most CPU-intensive containers"
+                        },
+                        "layout": {
+                            "y": 6,
+                            "x": 0,
+                            "height": 3,
+                            "width": 4
+                        },
+                        "id": 7649665275043388
+                    },
+                    {
+                        "definition": {
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1",
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            }
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "avg:docker.mem.rss{team:mse-platform,$mse-env} by {nomad_job}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "max"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "title_align": "left",
+                            "title_size": "16",
+                            "title": "Most RAM-intensive containers"
+                        },
+                        "layout": {
+                            "y": 6,
+                            "x": 4,
+                            "height": 3,
+                            "width": 4
+                        },
+                        "id": 5298859335352410
+                    },
+                    {
+                        "definition": {
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "query1",
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            }
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "avg:docker.net.bytes_sent{$mse-env,team:mse-platform} by {nomad_job}",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "max"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "title_align": "left",
+                            "title_size": "16",
+                            "title": "Most tx-intensive containers"
+                        },
+                        "layout": {
+                            "y": 6,
+                            "x": 8,
+                            "height": 3,
+                            "width": 4
+                        },
+                        "id": 1858988065389644
+                    },
+                    {
+                        "definition": {
+                            "type": "toplist",
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "timeshift(query1, 20)",
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            }
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "sum:docker.containers.running{team:mse-platform,$mse-env} by {nomad_job,nomad_task}.fill(last)",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "max"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "title_align": "left",
+                            "title_size": "16",
+                            "title": "Running containers by Nomad Task"
+                        },
+                        "layout": {
+                            "y": 9,
+                            "x": 0,
+                            "height": 5,
+                            "width": 12
+                        },
+                        "id": 7932684686863306
+                    },
+                    {
+                        "definition": {
+                            "title_size": "16",
+                            "title": "Running Barndoor Consumers",
+                            "title_align": "left",
+                            "time": {},
+                            "requests": [
+                                {
+                                    "formulas": [
+                                        {
+                                            "formula": "timeshift(query1, 20)",
+                                            "limit": {
+                                                "count": 500,
+                                                "order": "desc"
+                                            }
+                                        }
+                                    ],
+                                    "response_format": "scalar",
+                                    "queries": [
+                                        {
+                                            "query": "sum:docker.containers.running{environment:pte-barndoor,nomad_job:mse-ada-barndoor-qa} by {nomad_task,nomad_group}.fill(last)",
+                                            "data_source": "metrics",
+                                            "name": "query1",
+                                            "aggregator": "max"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "toplist"
+                        },
+                        "layout": {
+                            "y": 14,
+                            "x": 0,
+                            "height": 5,
+                            "width": 12
+                        },
+                        "id": 800328209756894
+                    }
+                ],
+                "layout_type": "ordered",
+                "background_color": "vivid_orange"
+            },
+            "layout": {
+                "y": 39,
+                "x": 0,
+                "height": 20,
+                "width": 12
+            },
+            "id": 6246093278120342
+        }
+    ],
+    "layout_type": "ordered"
+}
