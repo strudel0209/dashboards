@@ -21,7 +21,7 @@
       }
     ]
   },
-  "description": "Redis Dashboard for Prometheus Redis Exporter 1.x",
+  "description": "Redis Dashboard for Prometheus Redis Exporter 1.Xx",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "gnetId": 763,
